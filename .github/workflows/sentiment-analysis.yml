@@ -2,7 +2,7 @@ name: sentiment analysis pipeline
 
 on:
   schedule:
-    - cron: '0 * * * *'  # runs every hour
+    - cron: '0 */6 * * *'  # Every 6 hours = 4 runs/day
   workflow_dispatch:  # allows manual trigger
 
 jobs:
