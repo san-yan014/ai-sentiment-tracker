@@ -1,0 +1,30 @@
+name: sentiment analysis pipeline
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # runs every hour
+  workflow_dispatch:  # allows manual trigger
+
+jobs:
+  analyze-sentiment:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v3
+    
+    - name: set up python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: install dependencies
+      run: |
+        pip install -r requirements.txt
+    
+    - name: run sentiment analysis
+      env:
+        NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+        AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+      run: |
+        python sentiment_analyzer.py

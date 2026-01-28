@@ -1,0 +1,4 @@
+newsapi-python
+transformers
+torch
+azure-storage-blob
